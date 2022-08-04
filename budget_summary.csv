@@ -1,0 +1,9 @@
+email,month,year,date,status,subitem_name,amount,vendor,budget_code,invoice,description,notes
+xehu@wharton.upenn.edu,June - 6,2022,07/25/2022,paid,NA,100,Test Vendor,test-budget-code-1234,NA,Testing,test notes
+vpulgapsa-reporting@pobox.upenn,July - 7,2022,07/27/2022,paid,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
+test@test.com,July - 7,2022,07/01/2022,paid,2.6.1 Budget Subcommittee Development,100,test vendor,123-123-1234-4321-321,1245,test description,notes1
+test@test.com,July - 7,2022,07/07/2022,paid,2.6.4 Division Development (Finance),300,test vendor 2,123-123-1234-4321-321,1245,test description 2,notes4
+vpulgapsa-reporting@pobox.upenn,July - 7,2022,NA,submitted,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
+test@test.com,July - 7,2022,07/02/2022,submitted,NA,101,test vendor2,123-123-1234-4321-321,1245,test description2,notes2
+vpulgapsa-reporting@pobox.upenn,July - 7,2022,NA,expected,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
+test@test.com,July - 7,2022,07/03/2022,expected,NA,102,test vendor3,123-123-1234-4321-321,1245,test description3,notes3
