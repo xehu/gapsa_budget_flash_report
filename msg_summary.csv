@@ -1,5 +1,7 @@
 email,month,year,subitem_name,amt_allocated,amt_used
-test@test.com,July - 7,2022,2.6.1 Budget Subcommittee Development,0,0
-gapsa.funds@gapsa.upenn.edu,July - 7,2022,2.1.1 Student Group Event Fund,1000,500
-gapsa.funds@gapsa.upenn.edu,July - 7,2022,2.3.2 Community Outreach,350,290
-gapsa.funds@gapsa.upenn.edu,July - 7,2022,1.2.1 Special Projects (EVP),540,210
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,4.5.2 Division Development (Programming),250,257.21
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,4.5.1 Programming (Social),3000,2400
+gapsa.finance@gapsa.upenn.edu,July - 7,2022,3.3.1 Executive Board Meetings,0,948.44
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,4.5.2 Division Development (Programming),250,215
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,4.5.1 Programming (Social),3000,450
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,4.4.1 Programming (Cultural),4000,NA

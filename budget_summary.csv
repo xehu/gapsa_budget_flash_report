@@ -1,9 +1,8 @@
 email,month,year,date,status,subitem_name,amount,vendor,budget_code,invoice,description,notes
-xehu@wharton.upenn.edu,June - 6,2022,07/25/2022,paid,NA,100,Test Vendor,test-budget-code-1234,NA,Testing,test notes
-vpulgapsa-reporting@pobox.upenn,July - 7,2022,07/27/2022,paid,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
-test@test.com,July - 7,2022,07/01/2022,paid,2.6.1 Budget Subcommittee Development,100,test vendor,123-123-1234-4321-321,1245,test description,notes1
-test@test.com,July - 7,2022,07/07/2022,paid,2.6.4 Division Development (Finance),300,test vendor 2,123-123-1234-4321-321,1245,test description 2,notes4
-vpulgapsa-reporting@pobox.upenn,July - 7,2022,NA,submitted,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
-test@test.com,July - 7,2022,07/02/2022,submitted,NA,101,test vendor2,123-123-1234-4321-321,1245,test description2,notes2
-vpulgapsa-reporting@pobox.upenn,July - 7,2022,NA,expected,2.6.2 Financial Reporting Subcommittee Development,NA,NA,NA,NA,NA,NA
-test@test.com,July - 7,2022,07/03/2022,expected,NA,102,test vendor3,123-123-1234-4321-321,1245,test description3,notes3
+gapsa.finance@gapsa.upenn.edu,July - 7,2022,07/27/2022,paid,3.3.1 Executive Board Meetings,948.44,Landmark Americana,3036,0,Exec Board Happy Hour,NA
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/19/2022,paid,4.5.2 Division Development (Programming),84,lascala fire,3030,20,Food for Exec Meeting,Please contact Vice President Thakkar for Invoice and Amount.
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/20/2022,paid,4.5.2 Division Development (Programming),76.91,Goldie,3030,51,Food for Division Meeting,NA
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/24/2022,paid,4.5.2 Division Development (Programming),41.59,Saxbys,3030,3929694,Programming Division Meeting,NA
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/26/2022,paid,4.5.2 Division Development (Programming),14,Insomnia Cookies,3030,NA,Food for Meeting,NA
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/10/2022,paid,4.5.1 Programming (Social),450,Fogo De Chao,3030,NA,Alumni Brunch,NA
+gapsa.programming@gapsa.upenn.edu,July - 7,2022,07/02/2022,paid,4.4.1 Programming (Cultural),NA,American Revolution Museum Tickets,3030,NA,American Revolution Museum Tickets,NA
