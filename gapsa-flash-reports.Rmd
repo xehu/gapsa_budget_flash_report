@@ -14,7 +14,6 @@ library(tidyverse)
 
 ```{r}
 ## todo -- copy in qualtrics credentials!!
-
 surveys <- all_surveys()
 flashreport_survey_id <- (surveys %>% filter(name == "GAPSA Flash Report Form (2022-23)"))$id
 ```
@@ -46,11 +45,11 @@ msgcheckin_cleaned <- df.gaspa_response %>%
     msg_checkin = sub("#3_", "amt_used ", msg_checkin),
     msg_checkin = sub(" .*", "", msg_checkin)
   ) %>%
-  drop_na() %>%
   group_by(email, month, year, msg_checkin) %>%
   mutate(row = row_number()) %>%
   pivot_wider(names_from = "msg_checkin") %>%
-  select(-row)
+  select(-row) %>%
+  drop_na(subitem_name)
 ```
 
 ```{r}
@@ -87,11 +86,12 @@ paid_cleaned <- df.gaspa_response %>%
     paid = sub(" .*", "", paid),
     status = "paid"
   ) %>%
-  drop_na() %>%
   group_by(email, month, year, paid) %>%
   mutate(row = row_number()) %>%
   pivot_wider(names_from = "paid") %>%
-  select(-row)
+  select(-row) %>%
+  drop_na(subitem_name) %>%
+  unique()
 
 submitted_cleaned <- df.gaspa_response %>%
   select(email, month, year, grep("submitted", 
@@ -111,11 +111,12 @@ submitted_cleaned <- df.gaspa_response %>%
     submitted = sub(" .*", "", submitted),
     status = "submitted"
   ) %>%
-  drop_na() %>%
   group_by(email, month, year, submitted) %>%
   mutate(row = row_number()) %>%
   pivot_wider(names_from = "submitted") %>%
-  select(-row)
+  select(-row) %>%
+  drop_na(subitem_name) %>%
+  unique()
 
 expected_cleaned <- df.gaspa_response %>%
   select(email, month, year, grep("expected", 
@@ -135,11 +136,12 @@ expected_cleaned <- df.gaspa_response %>%
     expected = sub(" .*", "", expected),
     status = "expected"
   ) %>%
-  drop_na() %>%
   group_by(email, month, year, expected) %>%
   mutate(row = row_number()) %>%
   pivot_wider(names_from = "expected") %>%
-  select(-row)
+  select(-row) %>%
+  drop_na(subitem_name) %>%
+  unique()
 ```
 
 Export a summary of the budget
