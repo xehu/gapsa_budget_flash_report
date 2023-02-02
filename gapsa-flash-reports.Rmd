@@ -14,10 +14,12 @@ library(tidyverse)
 
 ```{r}
 ## todo -- copy in qualtrics credentials!!
-
 surveys <- all_surveys()
 flashreport_survey_id <- (surveys %>% filter(name == "GAPSA Flash Report Form (2022-23) V2"))$id
+msg_survey_id <- (surveys %>% filter(name == "GAPSA Monthly Goals Report (2022-23)"))$id
 ```
+
+# Flash Report Analysis
 
 ```{r}
 df.gaspa_response <- fetch_survey(
@@ -71,8 +73,8 @@ budget_summary <- df.gaspa_response %>%
 budget_summary %>% write_csv('budget_summary_new.csv')
 ```
 
+# Montly Spending Goal Analysis
 
-# OLD CODE FOR PREVIOUS VERSION#
 
 Check in on the Monthly Spending Goals (MSG)'s
 
@@ -82,125 +84,35 @@ msg_checkin
 #3_ ... [used]
 
 ```{r}
-# msgcheckin_cleaned <- df.gaspa_response %>%
-#   select(email, month, year, grep("msg_checkin", names(df.gaspa_response))) %>%
-#   mutate(across(everything(), as.character)) %>%
-#   pivot_longer(-c(email, month, year), names_to = "msg_checkin") %>%
-#   mutate(
-#     msg_checkin = sub("msg_checkin", "", msg_checkin),
-#     msg_checkin = sub("#1_", "subitem_name ", msg_checkin),
-#     msg_checkin = sub("#2_", "amt_allocated ", msg_checkin),
-#     msg_checkin = sub("#3_", "amt_used ", msg_checkin),
-#     msg_checkin = sub(" .*", "", msg_checkin)
-#   ) %>%
-#   group_by(email, month, year, msg_checkin) %>%
-#   mutate(row = row_number()) %>%
-#   pivot_wider(names_from = "msg_checkin") %>%
-#   select(-row) %>%
-#   drop_na(subitem_name)
+df.msg_response <- fetch_survey(
+  surveyID = msg_survey_id,
+  save_dir = ".",
+  force_request = TRUE
+)
+
+df.msg_response %>% head()
+
+msg_summary <- df.msg_response %>%
+  select(email, month, year, grep("main", names(df.msg_response))) %>%
+  mutate(across(everything(), as.character)) %>%
+  pivot_longer(-c(email, month, year), names_to = "main") %>%
+  mutate(
+    main = sub("main", "", main),
+    main = sub("#1_", "subitem_name ", main),
+    main = sub("#2_", "budget_code ", main),
+    main = sub("#3_", "description ", main),
+    main = sub("#4_", "amount_anticipated ", main),
+    main = sub("#5_", "notes ", main),
+    main = sub(" .*", "", main)
+  ) %>%
+  group_by(email, month, year, main) %>%
+  mutate(row = row_number()) %>%
+  pivot_wider(names_from = "main") %>%
+  select(-row) %>%
+  drop_na(subitem_name)
 ```
 
 ```{r}
-# msgcheckin_cleaned %>% write_csv('msg_summary.csv')
+msg_summary %>% write_csv('msg_summary.csv')
 ```
 
-
-paid
-#1_ ... [name of subitem]
-- number after _ is the nth row
-#2_ ... [date]
-#3_ ... [vendor]
-#8_ ... [budget code]
-#4_ ... [invoice]
-#5_ ... [amount]
-#6_ ... [description]
-#7_ ... [notes]
-
-```{r}
-# paid_cleaned <- df.gaspa_response %>%
-#   select(email, month, year, grep("paid", names(df.gaspa_response))) %>%
-#   mutate(across(everything(), as.character)) %>%
-#   pivot_longer(-c(email, month, year), names_to = "paid") %>%
-#   mutate(
-#     paid = sub("paid", "", paid),
-#     paid = sub("#1_", "subitem_name ", paid),
-#     paid = sub("#2_", "date ", paid),
-#     paid = sub("#3_", "vendor ", paid),
-#     paid = sub("#4_", "invoice ", paid),
-#     paid = sub("#5_", "amount ", paid),
-#     paid = sub("#6_", "description ", paid),
-#     paid = sub("#7_", "notes ", paid),
-#     paid = sub("#8_", "budget_code ", paid),
-#     paid = sub(" .*", "", paid),
-#     status = "paid"
-#   ) %>%
-#   group_by(email, month, year, paid) %>%
-#   mutate(row = row_number()) %>%
-#   pivot_wider(names_from = "paid") %>%
-#   select(-row) %>%
-#   drop_na(subitem_name) %>%
-#   unique()
-# 
-# submitted_cleaned <- df.gaspa_response %>%
-#   select(email, month, year, grep("submitted", 
-#                   names(df.gaspa_response))) %>%
-#   mutate(across(everything(), as.character)) %>%
-#   pivot_longer(-c(email, month, year), names_to = "submitted") %>%
-#   mutate(
-#     submitted = sub("submitted", "", submitted),
-#     submitted = sub("#1_", "subitem_name ", submitted),
-#     submitted = sub("#2_", "date ", submitted),
-#     submitted = sub("#3_", "vendor ", submitted),
-#     submitted = sub("#4_", "invoice ", submitted),
-#     submitted = sub("#5_", "amount ", submitted),
-#     submitted = sub("#6_", "description ", submitted),
-#     submitted = sub("#7_", "notes ", submitted),
-#     submitted = sub("#8_", "budget_code ", submitted),
-#     submitted = sub(" .*", "", submitted),
-#     status = "submitted"
-#   ) %>%
-#   group_by(email, month, year, submitted) %>%
-#   mutate(row = row_number()) %>%
-#   pivot_wider(names_from = "submitted") %>%
-#   select(-row) %>%
-#   drop_na(subitem_name) %>%
-#   unique()
-# 
-# expected_cleaned <- df.gaspa_response %>%
-#   select(email, month, year, grep("expected", 
-#                                   names(df.gaspa_response))) %>%
-#   mutate(across(everything(), as.character)) %>%
-#   pivot_longer(-c(email, month, year), names_to = "expected") %>%
-#   mutate(
-#     expected = sub("expected", "", expected),
-#     expected = sub("#1_", "subitem_name ", expected),
-#     expected = sub("#2_", "date ", expected),
-#     expected = sub("#3_", "vendor ", expected),
-#     expected = sub("#4_", "invoice ", expected),
-#     expected = sub("#5_", "amount ", expected),
-#     expected = sub("#6_", "description ", expected),
-#     expected = sub("#7_", "notes ", expected),
-#     expected = sub("#8_", "budget_code ", expected),
-#     expected = sub(" .*", "", expected),
-#     status = "expected"
-#   ) %>%
-#   group_by(email, month, year, expected) %>%
-#   mutate(row = row_number()) %>%
-#   pivot_wider(names_from = "expected") %>%
-#   select(-row) %>%
-#   drop_na(subitem_name) %>%
-#   unique()
-```
-
-Export a summary of the budget
-
-```{r}
-# budget_items_all <- paid_cleaned %>% rbind(submitted_cleaned) %>%
-#  rbind(expected_cleaned) %>% 
-#   select(email, month, year, date, status,
-#          subitem_name, amount, vendor,
-#          budget_code, invoice,
-#          description, notes)
-# 
-# budget_items_all %>% write_csv('budget_summary.csv')
-```
